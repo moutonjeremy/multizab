@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-12">
+    <h1 class="page-head-line">Config </h1>
+</div>
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form accept-charset="UTF-8" role="form" method="post">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="hostname">Hostname</label>
+                    {{ form.hostname(class="form-control", placeholder="Hostname") }}
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    {{ form.username(class="form-control", placeholder="Username") }}
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    {{ form.password(class="form-control", placeholder="Password") }}
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Hostname</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for host in hosts %}
+            <tr>
+                <td>{{ host.host }}</td>
+                <td>{{ host.username }}</td>
+                <td>............</td>
+                <td><a type="button" class="btn btn-warning btn-xs">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

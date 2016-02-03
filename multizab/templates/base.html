@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>MultiZab</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/font-awesome.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <div id="container-fluid">
+        <div id="row placeholders">
+            <div class="col-sm-1 col-md-1 sidebar">
+                <ul class="nav nav-sidebar nav-list" id="nav">
+                    <li><a href="{{ url_for('gui.index') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('gui.config') }}">Config</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1">
+                <div class="row">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="col-md-12">
+                        <div class="alert alert-danger">
+                            <ul class="flashes">
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/angular-moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

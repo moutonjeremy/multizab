@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-12">
+    <h1 class="page-head-line">Dashboard </h1>
+</div>
+<div class="col-md-12" ng-app="multiZab">
+    <div class="table-responsive" ng-controller="AlertsListCtrl">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Host</th>
+                    <th>Platform</th>
+                    <th>Description</th>
+                    <td>Date</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="trigger in results.result | orderBy:['-priority','lastchange']"
+                    ng-class="{
+                        'disaster': trigger.priority==5,
+                        'alert': trigger.priority==4,
+                        'info': trigger.priority==1,
+                        'warning': trigger.priority==2,
+                        'error': trigger.priority==3}">
+                    <td>{[trigger.host]}</td>
+                    <td>{[trigger.platform]}</td>
+                    <td>{[trigger.description]}</td>
+                    <td><span am-time-ago="trigger.lastchange | amFromUnix"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

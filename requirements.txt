@@ -3,4 +3,4 @@ flask-wtf
 gunicorn
 flask-sqlalchemy
 flask-migrate
-zabbix-client
+pyzabbix

@@ -1,6 +1,5 @@
 import os
 import logging
-from werkzeug.contrib.cache import SimpleCache
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -45,5 +44,3 @@ def configure_app(app):
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
-    # Configure Cache
-    app.cache = SimpleCache()

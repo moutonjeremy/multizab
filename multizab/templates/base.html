@@ -1,20 +1,32 @@
 <html>
 <head>
     <title>MultiZab</title>
-    <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/font-awesome.css') }}" rel="stylesheet" />
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">MultiZab</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('gui.index') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('gui.config') }}">Config</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
     <div id="container-fluid">
         <div id="row placeholders">
-            <div class="col-sm-1 col-md-1 sidebar">
-                <ul class="nav nav-sidebar nav-list" id="nav">
-                    <li><a href="{{ url_for('gui.index') }}">Dashboard</a></li>
-                    <li><a href="{{ url_for('gui.config') }}">Config</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1">
+            <div class="col-sm-12 col-md-12">
                 <div class="row">
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}

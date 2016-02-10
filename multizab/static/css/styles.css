@@ -1,0 +1,19 @@
+.information {
+    background-color: #D6F6FF;
+}
+
+.warning {
+    background-color: #FFF6A5;
+}
+
+.average {
+    background-color: #FFB689;
+}
+
+.high {
+    background-color: #FF9999;
+}
+
+.disaster {
+    background-color: #FF3838;
+}

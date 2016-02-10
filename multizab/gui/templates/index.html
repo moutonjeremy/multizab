@@ -15,11 +15,11 @@
             <tbody>
                 <tr ng-repeat="trigger in results.result | orderBy:['-priority','-lastchange']"
                     ng-class="{
-                        'btn-danger': trigger.priority==5,
-                        'btn-warning': trigger.priority==4,
-                        'btn-info': trigger.priority==3,
-                        'btn-primary': trigger.priority==2,
-                        'btn-success': trigger.priority==1}">
+                        'disaster': trigger.priority==5,
+                        'high': trigger.priority==4,
+                        'average': trigger.priority==3,
+                        'warning': trigger.priority==2,
+                        'information': trigger.priority==1}">
                     <td>{[trigger.host]}</td>
                     <td>{[trigger.platform]}</td>
                     <td>{[trigger.description]}</td>

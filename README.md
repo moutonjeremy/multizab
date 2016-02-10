@@ -1,5 +1,5 @@
 # multizab
-
+![ScreenShot](https://github.com/Jeremmm/multizab/blob/master/multizab/static/img/multizab_screen.png)
 ## First usage
 
 ### Clone repo
@@ -30,4 +30,3 @@ env/bin/python manage.py db upgrade
 ```bash
 env/bin/python manage.py runserver
 ```
-

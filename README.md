@@ -1,5 +1,10 @@
 # multizab
 ![ScreenShot](https://github.com/Jeremmm/multizab/blob/master/multizab/static/img/multizab_screen.png)
+
+### Comming
+ - DB less
+ - Graph (per trigger level/hosts/Zabbix)
+
 ## First usage
 
 ### Clone repo

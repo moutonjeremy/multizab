@@ -5,10 +5,10 @@
 ### 13 Feb 2016
  - Remove database (json file used now)
  - Logging if a zabbix backend is ko
+ - python 3 compatibility
 
 ### Coming
  - Graph (per trigger level/hosts/Zabbix)
- - python 3 compatibility
 
 ## First usage
 

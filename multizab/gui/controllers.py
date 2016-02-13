@@ -1,8 +1,11 @@
 from flask import Blueprint, render_template, request
 from flask import redirect, url_for, flash
+from flask import current_app
 from forms import HostForm
 
-from multizab.data.models import db, Zabbix
+from slugify import slugify
+
+import json
 
 gui = Blueprint('gui', __name__, template_folder='templates')
 
@@ -31,19 +34,21 @@ def config():
 
     :return:
     """
+    with open(current_app.config['DATABASE_FILE'], 'r') as f:
+        json_file = json.load(f)
     form = HostForm()
     if request.method == 'POST':
-        if Zabbix.query.filter(Zabbix.host == form.hostname.data).first():
-            flash('Hostname already exist !!!')
-        u = Zabbix(host=form.hostname.data,
-                   username=form.username.data,
-                   password=form.password.data)
-        db.session.add(u)
-        db.session.commit()
+        if slugify(form.name.data) not in json_file['hosts']:
+            json_file['hosts'].append({'name': slugify(form.name.data),
+                                       'uri': form.uri.data,
+                                       'username': form.username.data,
+                                       'password': form.password.data})
+        with open(current_app.config['DATABASE_FILE'], 'w') as f:
+            json.dump(json_file, f, indent=4)
+        f.close()
         flash('Host added !!!')
         return redirect(url_for('gui.config'))
-    hosts = Zabbix.query.all()
-    return render_template('config.html', form=form, hosts=hosts)
+    return render_template('config.html', form=form, hosts=json_file['hosts'])
 
 
 @gui.route('/config/delete/host/<host_id>')
@@ -53,11 +58,15 @@ def config_delete_host(host_id):
     :param host_id:
     :return:
     """
-    host = Zabbix.query.filter(Zabbix.id == host_id).first()
-    if host:
-        db.session.delete(host)
-        db.session.commit()
-        flash('Host deleted !!!')
-        return redirect(url_for('gui.config'))
+    with open(current_app.config['DATABASE_FILE'], 'r') as f:
+        json_file = json.load(f)
+    for i in json_file['hosts']:
+        if host_id == i['name']:
+            json_file['hosts'].pop(json_file['hosts'].index(i))
+            with open(current_app.config['DATABASE_FILE'], 'w') as f:
+                json.dump(json_file, f, indent=4)
+            f.close()
+            flash('Host deleted !!!')
+            return redirect(url_for('gui.config'))
     flash('Invalid Host')
     return redirect(url_for('gui.config'))

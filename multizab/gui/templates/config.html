@@ -9,8 +9,12 @@
             <form accept-charset="UTF-8" role="form" method="post">
                 {{ form.hidden_tag() }}
                 <div class="form-group">
-                    <label for="hostname">Hostname</label>
-                    {{ form.hostname(class="form-control", placeholder="Hostname") }}
+                    <label for="name">Name</label>
+                    {{ form.name(class="form-control", placeholder="Name") }}
+                </div>
+                <div class="form-group">
+                    <label for="uri">URI</label>
+                    {{ form.uri(class="form-control", placeholder="URI like http://192.168.0.1/zabbix") }}
                 </div>
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -30,7 +34,8 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Hostname</th>
+                    <th>Name</th>
+                    <th>URI</th>
                     <th>Username</th>
                     <th>Password</th>
                     <td>Action</td>
@@ -39,10 +44,11 @@
             <tbody>
             {% for host in hosts %}
             <tr>
-                <td>{{ host.host }}</td>
+                <td>{{ host.name }}</td>
+                <td>{{ host.uri }}</td>
                 <td>{{ host.username }}</td>
                 <td>............</td>
-                <td><a type="button" class="btn btn-warning btn-xs" href="{{ url_for('gui.config_delete_host', host_id=host.id) }}">Delete</a>
+                <td><a type="button" class="btn btn-warning btn-xs" href="{{ url_for('gui.config_delete_host', host_id=host.name) }}">Delete</a>
                 </td>
             </tr>
             {% endfor %}

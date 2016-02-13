@@ -7,3 +7,4 @@ app.db
 db_repository
 migrations
 config.py
+hosts.json

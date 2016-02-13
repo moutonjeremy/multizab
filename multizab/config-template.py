@@ -1,17 +1,18 @@
 import os
 import logging
+import json
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 class BaseConfig(object):
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
     SECRET_KEY = '254496C5-9F6F-4A8D-A60E-219CF83AE015'
     LOGGING_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     LOGGING_LOCATION = 'multizab.log'
     LOGGING_LEVEL = logging.DEBUG
+    DATABASE_FILE = os.path.join(basedir, 'hosts.json')
 
 
 class DevelopmentConfig(BaseConfig):
@@ -23,7 +24,6 @@ class DevelopmentConfig(BaseConfig):
 class TestingConfig(BaseConfig):
     DEBUG = False
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
     SECRET_KEY = 'E0D82A3C-D954-471B-8772-D762BF746F45'
 
 
@@ -32,6 +32,12 @@ config = {
     "testing": "multizab.config.TestingConfig",
     "default": "multizab.config.DevelopmentConfig"
 }
+
+
+def database(path):
+    if not os.path.exists(path):
+        with open(path, 'wb') as f:
+            json.dump({'hosts': []}, f, ensure_ascii=False)
 
 
 def configure_app(app):
@@ -44,3 +50,4 @@ def configure_app(app):
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
+    database(app.config['DATABASE_FILE'])

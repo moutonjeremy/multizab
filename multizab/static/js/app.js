@@ -5,7 +5,7 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
   $interpolateProvider.endSymbol(']}');
 }]);
 
-app.controller('AlertsListCtrl', function ($scope, $http, $q, $interval){
+app.controller('AlertsListCtrl', function ($scope, $http, $q, $interval, $timeout){
     this.loadNotifications = function (){
         var deferred = $q.defer()
         $http.get('api/alerts')
@@ -21,7 +21,9 @@ app.controller('AlertsListCtrl', function ($scope, $http, $q, $interval){
     }
 
     $interval(function(){
-       this.loadNotifications();
+        $timeout(function(){
+            this.loadNotifications();
+        }, 1000);
     }.bind(this), 10000);
 
     this.loadNotifications();

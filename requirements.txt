@@ -1,6 +1,5 @@
 flask
 flask-wtf
 gunicorn
-flask-sqlalchemy
-flask-migrate
 pyzabbix
+slugify

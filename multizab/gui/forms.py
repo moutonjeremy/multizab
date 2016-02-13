@@ -3,6 +3,7 @@ from flask_wtf import Form
 
 
 class HostForm(Form):
-    hostname = StringField('hostname')
+    name = StringField('name')
+    uri = StringField('uri')
     username = StringField('username')
     password = PasswordField('password')

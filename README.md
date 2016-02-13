@@ -6,8 +6,9 @@
  - Remove database (json file used now)
  - Logging if a zabbix backend is ko
 
-### Comming
+### Coming
  - Graph (per trigger level/hosts/Zabbix)
+ - python 3 compatibility
 
 ## First usage
 

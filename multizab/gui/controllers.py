@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask import redirect, url_for, flash
 from flask import current_app
-from forms import HostForm
+from multizab.gui.forms import HostForm
 
 from slugify import slugify
 
@@ -17,15 +17,6 @@ def index():
     :return:
     """
     return render_template('index.html')
-
-
-@gui.route('/map')
-def map():
-    """
-
-    :return:
-    """
-    return render_template('map.html')
 
 
 @gui.route('/config', methods=['POST', 'GET'])

@@ -1,6 +1,6 @@
 from flask import Flask
-from utils import get_instance_folder_path
-from config import configure_app
+from multizab.utils import get_instance_folder_path
+from multizab.config import configure_app
 
 from multizab.api.controllers import api
 from multizab.gui.controllers import gui

@@ -1,5 +1,6 @@
 flask
 flask-wtf
+flask-script
 gunicorn
 pyzabbix
-slugify
+python-slugify

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, current_app
-from pyzabbix import ZabbixAPI
 import json
+from multizab.zapi import ZabbixAPI
 
 api = Blueprint('api', __name__)
 
@@ -12,7 +12,6 @@ def alerts():
         hosts = json.load(f)['hosts']
     for i in hosts:
         zapi = ZabbixAPI(i['uri'])
-        zapi.session.verify = False
         zapi.timeout = 2
         try:
             zapi.login(i['username'], i['password'])
@@ -27,6 +26,6 @@ def alerts():
             for j in triggers:
                 j['platform'] = i['name']
                 alerts_data.append(j)
-        except:
+        except ValueError:
             current_app.logger.error('connection error: {0}'.format(i['name']))
     return jsonify({'result': alerts_data})

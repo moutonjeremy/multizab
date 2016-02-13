@@ -4,6 +4,7 @@
 ## Update
 ### 13 Feb 2016
  - Remove database (json file used now)
+ - Loggin if a zabbix backend is ko
 
 ### Comming
  - Graph (per trigger level/hosts/Zabbix)

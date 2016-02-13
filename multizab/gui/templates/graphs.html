@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-12" ng-app="multiZab">
+    <div class="row">
+        <div class="col-md-6" ng-controller="CountPerZabbixCtrl">
+            <div class="panel panel-default">
+                <div class="panel-heading">Count Alerts Per Zabbix</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-polar-area" chart-data="data"
+                        chart-labels="labels" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" ng-controller="CountPerTypeCtrl">
+            <div class="panel panel-default">
+                <div class="panel-heading">Count Alerts Per Types</div>
+                <div class="panel-body">
+                    <canvas class="chart chart-polar-area" chart-data="data"
+                        chart-labels="labels" chart-legend="true">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="ZabbixListCtrl">
+            <div class="col-md-6" ng-repeat="zabbix in results.result">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Count Alerts Per Types for {[zabbix]}</div>
+                    <div class="panel-body" ng-controller="CountPerTypesZabbixCtrl" ng-init="init(zabbix)">
+                        <canvas class="chart chart-polar-area" chart-data="data"
+                            chart-labels="labels" chart-legend="true">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

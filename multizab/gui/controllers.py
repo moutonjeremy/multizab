@@ -19,6 +19,15 @@ def index():
     return render_template('index.html')
 
 
+@gui.route('/graphics')
+def graphics():
+    """
+
+    :return:
+    """
+    return render_template('graphs.html')
+
+
 @gui.route('/config', methods=['POST', 'GET'])
 def config():
     """

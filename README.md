@@ -1,14 +1,18 @@
 # multizab
 ![ScreenShot](https://github.com/Jeremmm/multizab/blob/master/multizab/static/img/multizab_screen.png)
 
+![ScreenShot](https://github.com/Jeremmm/multizab/blob/master/multizab/static/img/multizab_screen_graphics.png)
+
+
 ## Update
 ### 13 Feb 2016
  - Remove database (json file used now)
  - Logging if a zabbix backend is ko
  - python 3 compatibility
+ - Graph (per trigger level/hosts/Zabbix)
 
 ### Coming
- - Graph (per trigger level/hosts/Zabbix)
+ ...
 
 ## First usage
 

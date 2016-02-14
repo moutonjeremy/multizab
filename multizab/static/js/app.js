@@ -6,6 +6,18 @@ app.config(['$interpolateProvider', function($interpolateProvider) {
 }]);
 
 app.factory('GetFactory', function($http, $q) {
+    function httpGet(path){
+        var deferred = $q.defer();
+        $http.get(path)
+            .success(function (data, status) {
+                factory.result = data;
+                deferred.resolve(factory.result);
+            }).error(function (data, status) {
+                deferred.reject('Error');
+            });
+            return deferred.promise;
+    }
+
     var factory = {
         result : false,
         getResult : function(path) {

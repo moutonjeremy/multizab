@@ -1,4 +1,6 @@
 # multizab
+[![Code Climate](https://codeclimate.com/github/Jeremmm/multizab/badges/gpa.svg)](https://codeclimate.com/github/Jeremmm/multizab)
+
 ![ScreenShot](https://github.com/Jeremmm/multizab/blob/master/multizab/static/img/multizab_screen.png)
 
 ![ScreenShot](https://github.com/Jeremmm/multizab/blob/master/multizab/static/img/multizab_screen_graphics.png)

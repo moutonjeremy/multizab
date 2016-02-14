@@ -34,11 +34,14 @@ def get_zabbix_list():
 
 
 def count_type(triggers):
+    """
+
+    :param triggers:
+    :return:
+    """
     types = ['disaster', 'high', 'average', 'warning', 'information', 'not_classified']
-    priority_list = []
+    priority_list = [i['priority'] for i in triggers]
     count_types = {}
-    for i in triggers:
-                priority_list.append(i['priority'])
     for i in types:
         count_types[i] = priority_list.count(i)
     return count_types

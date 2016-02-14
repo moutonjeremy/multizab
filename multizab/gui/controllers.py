@@ -14,7 +14,6 @@ gui = Blueprint('gui', __name__, template_folder='templates')
 def index():
     """
 
-    :return:
     """
     return render_template('index.html')
 
@@ -23,7 +22,6 @@ def index():
 def graphics():
     """
 
-    :return:
     """
     return render_template('graphs.html')
 
@@ -32,7 +30,6 @@ def graphics():
 def config():
     """
 
-    :return:
     """
     with open(current_app.config['DATABASE_FILE'], 'r') as f:
         json_file = json.load(f)
@@ -55,8 +52,6 @@ def config():
 def config_delete_host(host_id):
     """
 
-    :param host_id:
-    :return:
     """
     with open(current_app.config['DATABASE_FILE'], 'r') as f:
         json_file = json.load(f)

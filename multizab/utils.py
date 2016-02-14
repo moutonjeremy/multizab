@@ -27,7 +27,6 @@ def get_instance_folder_path():
 def get_zabbix_list():
     """
 
-    :return:
     """
     with open(current_app.config['DATABASE_FILE']) as f:
         return json.load(f)['hosts']
@@ -36,8 +35,6 @@ def get_zabbix_list():
 def count_type(triggers):
     """
 
-    :param triggers:
-    :return:
     """
     types = ['disaster', 'high', 'average', 'warning', 'information', 'not_classified']
     priority_list = [i['priority'] for i in triggers]
@@ -54,10 +51,6 @@ class Zabbix:
     def __init__(self, url, username, password):
         """
 
-        :param url:
-        :param username:
-        :param password:
-        :return:
         """
         self.zapi = ZabbixAPI(url)
         self.zapi.timeout = 2
@@ -69,7 +62,6 @@ class Zabbix:
     def get_triggers(self):
         """
 
-        :return:
         """
         result = []
         for i in self.zapi.trigger.get(only_true=1,

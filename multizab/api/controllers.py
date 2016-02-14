@@ -3,12 +3,10 @@ from multizab.utils import Zabbix, get_zabbix_list, count_type
 
 api = Blueprint('api', __name__)
 
-
 @api.route('/alerts')
 def alerts():
     """
 
-    :return:
     """
     alerts_data = []
     hosts = get_zabbix_list()
@@ -23,7 +21,6 @@ def alerts():
 def graphics():
     """
 
-    :return:
     """
     result = {'count_alerts': {}, 'count_types': {}, 'count_types_per_zabbix': {}}
     hosts = get_zabbix_list()

@@ -31,7 +31,7 @@ class ZabbixAPI(object):
         """
         :param user: zabbix user
         :param password: zabbix user password
-        :return: return session
+        :return: session
         """
         self.auth = self.user.login(user=user, password=password)
 
@@ -39,7 +39,7 @@ class ZabbixAPI(object):
         """
         :param method: zabbix method
         :param params: params for method
-        :return: return json response
+        :return: json response
         """
         rq = {
             'jsonrpc': '2.0',

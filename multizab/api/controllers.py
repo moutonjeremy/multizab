@@ -7,7 +7,7 @@ api = Blueprint('api', __name__)
 @api.route('/alerts')
 def alerts():
     alerts_data = []
-    hosts = get_zabbix_list()
+    hosts = get_zabbix_list()['hosts']
     for i in hosts:
         for j in Zabbix(i['uri'], i['username'], i['password']).get_triggers():
             j['platform'] = i['name']
@@ -19,7 +19,7 @@ def alerts():
 def graphics():
     count_alerts = {}
     count_types_per_zabbix = {}
-    hosts = get_zabbix_list()
+    hosts = get_zabbix_list()['hosts']
     triggers = []
     for i in hosts:
         for j in Zabbix(i['uri'], i['username'], i['password']).get_triggers():

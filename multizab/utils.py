@@ -18,7 +18,7 @@ def get_instance_folder_path():
 
 def get_zabbix_list():
     with open(current_app.config['DATABASE_FILE']) as f:
-        return json.load(f)['hosts']
+        return json.load(f)
 
 
 def count_type(triggers):

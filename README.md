@@ -26,7 +26,7 @@ git clone git@github.com:Jeremmm/multizab.git
 ### Create virtualenv
 ```bash
 cd multizab
-virtualenv env -p=python2.7
+virtualenv env -p python2.7
 ```
 
 ### Install dependencies

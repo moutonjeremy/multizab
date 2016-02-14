@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request
 from flask import redirect, url_for, flash
 from flask import current_app
 from multizab.gui.forms import HostForm
+from multizab.utils import get_zabbix_list
 
 from slugify import slugify
 
@@ -22,8 +23,7 @@ def graphics():
 
 @gui.route('/config', methods=['POST', 'GET'])
 def config():
-    with open(current_app.config['DATABASE_FILE'], 'r') as f:
-        json_file = json.load(f)
+    json_file = get_zabbix_list()
     form = HostForm()
     if request.method == 'POST':
         if slugify(form.name.data) not in json_file['hosts']:
@@ -41,8 +41,7 @@ def config():
 
 @gui.route('/config/delete/host/<host_id>')
 def config_delete_host(host_id):
-    with open(current_app.config['DATABASE_FILE'], 'r') as f:
-        json_file = json.load(f)
+    json_file = get_zabbix_list()
     for i in json_file['hosts']:
         if host_id == i['name']:
             json_file['hosts'].pop(json_file['hosts'].index(i))

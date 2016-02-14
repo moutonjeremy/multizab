@@ -19,4 +19,4 @@ ratings:
   - "**.css"
   - "**.js"
   - "**.py"
-exclude_paths: ['/multizab/static/js/angular-chart.js','/multizab/static/js/angular-moment.min.js']
+exclude_paths: ['/multizab/static/js/angular-chart.js','/multizab/static/js/angular-moment.min.js','/multizab/static/js/moment.min.js']

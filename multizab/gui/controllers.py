@@ -12,25 +12,16 @@ gui = Blueprint('gui', __name__, template_folder='templates')
 
 @gui.route('/')
 def index():
-    """
-
-    """
     return render_template('index.html')
 
 
 @gui.route('/graphics')
 def graphics():
-    """
-
-    """
     return render_template('graphs.html')
 
 
 @gui.route('/config', methods=['POST', 'GET'])
 def config():
-    """
-
-    """
     with open(current_app.config['DATABASE_FILE'], 'r') as f:
         json_file = json.load(f)
     form = HostForm()
@@ -50,9 +41,6 @@ def config():
 
 @gui.route('/config/delete/host/<host_id>')
 def config_delete_host(host_id):
-    """
-
-    """
     with open(current_app.config['DATABASE_FILE'], 'r') as f:
         json_file = json.load(f)
     for i in json_file['hosts']:

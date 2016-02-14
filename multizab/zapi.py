@@ -4,18 +4,11 @@ import uuid
 
 
 class ZabbixException(Exception):
-    """
-    Zabbix Exception
-    """
     pass
 
 
 class ZabbixAPI(object):
     def __init__(self, url, timeout=None, session=None):
-        """
-        :param url: zabbix url
-        :param timeout: timeout request
-        """
         self.url = url + '/api_jsonrpc.php'
         self.timeout = timeout
 
@@ -28,19 +21,9 @@ class ZabbixAPI(object):
         self.session.headers.update({'Content-Type': 'application/json-rpc'})
 
     def login(self, user, password):
-        """
-        :param user: zabbix user
-        :param password: zabbix user password
-        :return: session
-        """
         self.auth = self.user.login(user=user, password=password)
 
     def do_request(self, method, params=None):
-        """
-        :param method: zabbix method
-        :param params: params for method
-        :return: json response
-        """
         rq = {
             'jsonrpc': '2.0',
             'method': method,
@@ -70,31 +53,15 @@ class ZabbixAPI(object):
         return rp_json
 
     def __getattr__(self, item):
-        """
-        :param item:
-        :return:
-        """
         return ZabbixObject(item, self)
 
 
 class ZabbixObject(object):
-    """
-    Send request to zabbix
-    """
     def __init__(self, key, value):
-        """
-        :param key:
-        :param value:
-        :return:
-        """
         self.key = key
         self.value = value
 
     def __getattr__(self, item):
-        """
-        :param item:
-        :return:
-        """
         def fn(*args, **kwargs):
             if args and kwargs:
                 raise TypeError("Found both args and kwargs")

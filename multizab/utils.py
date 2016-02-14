@@ -9,33 +9,19 @@ types_data = {'5': 'disaster', '4': 'high',
 
 
 def get_app_base_path():
-    """
-
-    :return:
-    """
     return os.path.dirname(os.path.realpath(__file__))
 
 
 def get_instance_folder_path():
-    """
-
-    :return:
-    """
     return os.path.join(get_app_base_path(), 'instance')
 
 
 def get_zabbix_list():
-    """
-
-    """
     with open(current_app.config['DATABASE_FILE']) as f:
         return json.load(f)['hosts']
 
 
 def count_type(triggers):
-    """
-
-    """
     types = ['disaster', 'high', 'average', 'warning', 'information', 'not_classified']
     priority_list = [i['priority'] for i in triggers]
     count_types = {}
@@ -45,13 +31,7 @@ def count_type(triggers):
 
 
 class Zabbix:
-    """
-    Zabbix Class
-    """
     def __init__(self, url, username, password):
-        """
-
-        """
         self.zapi = ZabbixAPI(url)
         self.zapi.timeout = 2
         try:
@@ -60,9 +40,6 @@ class Zabbix:
             current_app.logger.error('connection error: {0}'.format(url))
 
     def get_triggers(self):
-        """
-
-        """
         result = []
         for i in self.zapi.trigger.get(only_true=1,
                                        skipDependent=1,

@@ -3,7 +3,7 @@
 <meta http-equiv="refresh" content="30" >
 <div class="col-md-12" ng-app="multiZab">
     <div class="row" ng-controller="RefreshCacheCtrl">
-        <div class="col-md-6" ng-controller="CountAlertsCtrl">
+        <div class="col-md-6" ng-controller="CountTypesCtrl" ng-init="init('count_alerts')">
             <div class="panel panel-default" ng-show="labels">
                 <div class="panel-heading">Count Alerts Per Zabbix</div>
                 <div class="panel-body">
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6" ng-controller="CountPerTypeCtrl">
+        <div class="col-md-6" ng-controller="CountTypesCtrl" ng-init="init('count_types')">
             <div class="panel panel-default">
                 <div class="panel-heading">Count Alerts Per Types</div>
                 <div class="panel-body">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div ng-controller="CountAlertsCtrl">
+        <div ng-controller="CountTypesCtrl" ng-init="init('count_alerts')">
             <div class="col-md-6" ng-repeat="label in labels">
                 <div class="panel panel-default">
                     <div class="panel-heading">Count Alerts Per Types for {[label]}</div>

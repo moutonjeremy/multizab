@@ -1,6 +1,7 @@
 import os
 from multizab.zapi import ZabbixAPI
 from flask import current_app
+import json
 
 types_data = {'5': 'disaster', '4': 'high',
               '3': 'average', '2': 'warning',
@@ -21,6 +22,26 @@ def get_instance_folder_path():
     :return:
     """
     return os.path.join(get_app_base_path(), 'instance')
+
+
+def get_zabbix_list():
+    """
+
+    :return:
+    """
+    with open(current_app.config['DATABASE_FILE']) as f:
+        return json.load(f)['hosts']
+
+
+def count_type(triggers):
+    types = ['disaster', 'high', 'average', 'warning', 'information', 'not_classified']
+    priority_list = []
+    count_types = {}
+    for i in triggers:
+                priority_list.append(i['priority'])
+    for i in types:
+        count_types[i] = priority_list.count(i)
+    return count_types
 
 
 class Zabbix:

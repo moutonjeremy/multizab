@@ -17,7 +17,8 @@ def alerts():
 
 @api.route('/graphics')
 def graphics():
-    result = {'count_alerts': {}, 'count_types': {}, 'count_types_per_zabbix': {}}
+    count_alerts = {}
+    count_types_per_zabbix = {}
     hosts = get_zabbix_list()
     triggers = []
     for i in hosts:
@@ -25,11 +26,11 @@ def graphics():
             j['platform'] = i['name']
             triggers.append(j)
     for i in triggers:
-        if i['platform'] not in result['count_alerts']:
-            result['count_alerts'][i['platform']] = 0
-        result['count_alerts'][i['platform']] += 1
-    result['count_types'] = count_type(triggers)
-    for i in result['count_alerts']:
-        result['count_types_per_zabbix'][i] = count_type([j for j in triggers if j['platform'] == i])
-    return jsonify({'result': result})
+        if i['platform'] not in count_alerts:
+            count_alerts[i['platform']] = 0
+        count_alerts[i['platform']] += 1
+    for i in count_alerts:
+        count_types_per_zabbix[i] = count_type([j for j in triggers if j['platform'] == i])
+    return jsonify({'result': {'count_alerts': count_alerts, 'count_types_per_zabbix': count_types_per_zabbix,
+                               'count_types': count_type(triggers)}})
 

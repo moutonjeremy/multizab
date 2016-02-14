@@ -7,6 +7,7 @@ engines:
     exclude_fingerprints:
     - 8b720e14ef793a7c8aff12b191e923c9
     - c994ba6afd02cca16e197f3367e24804
+    - 63798d2fd272b52346a9bf9ffb74cbf5
     config:
       languages:
       - javascript

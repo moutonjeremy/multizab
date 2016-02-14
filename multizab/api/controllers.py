@@ -19,49 +19,25 @@ def alerts():
     return jsonify({'result': alerts_data})
 
 
-@api.route('/list/zabbix')
-def list_zabbix():
+@api.route('/graphics')
+def graphics():
     """
 
     :return:
     """
-    return jsonify({'result': [i['name'] for i in get_zabbix_list()]})
-
-
-@api.route('/count/alerts')
-def count_alerts():
-    """
-
-    :return:
-    """
-    alerts_data = {}
+    result = {'count_alerts': {}, 'count_types': {}, 'count_types_per_zabbix': {}}
     hosts = get_zabbix_list()
+    triggers = []
     for i in hosts:
-        alerts_data[i['name']] = len(Zabbix(i['uri'], i['username'], i['password']).get_triggers())
-    return jsonify({'result': alerts_data})
+        for j in Zabbix(i['uri'], i['username'], i['password']).get_triggers():
+            j['platform'] = i['name']
+            triggers.append(j)
+    for i in triggers:
+        if i['platform'] not in result['count_alerts']:
+            result['count_alerts'][i['platform']] = 0
+        result['count_alerts'][i['platform']] += 1
+    result['count_types'] = count_type(triggers)
+    for i in result['count_alerts']:
+        result['count_types_per_zabbix'][i] = count_type([j for j in triggers if j['platform'] == i])
+    return jsonify({'result': result})
 
-
-@api.route('/count/types')
-def count_types():
-    """
-
-    :return:
-    """
-    hosts = get_zabbix_list()
-    triggers = [j for i in hosts for j in Zabbix(i['uri'], i['username'], i['password']).get_triggers()]
-    types_data = count_type(triggers)
-    return jsonify({'result': types_data})
-
-
-@api.route('/count/types/<zabbix_name>')
-def count_types_zabbix(zabbix_name):
-    """
-    
-    :param zabbix_name:
-    :return:
-    """
-    hosts = get_zabbix_list()
-    triggers = [j for i in hosts if zabbix_name == i['name']
-                for j in Zabbix(i['uri'], i['username'], i['password']).get_triggers()]
-    types_data = count_type(triggers)
-    return jsonify({'result': types_data})

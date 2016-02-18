@@ -42,5 +42,5 @@ env/bin/gunicorn -w 4 multizab:app -b 127.0.0.1:8000 -D
 ## Author
 Jeremy Mouton (@jeremmm) <jeremmm@labbs.fr>
 
-## Licence
+## License
 MIT. See ``LICENSE`` for more details.

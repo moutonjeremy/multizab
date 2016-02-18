@@ -2,6 +2,14 @@
 {% block content %}
 <div class="col-md-12" ng-app="multiZab">
     <div class="table-responsive" ng-controller="AlertsListCtrl">
+        <div class="checkbox">
+            <label><input type="checkbox" ng-click="filterAlerts('disaster')">Disaster</label>
+            <label><input type="checkbox" ng-click="filterAlerts('high')">High</label>
+            <label><input type="checkbox" ng-click="filterAlerts('average')">Average</label>
+            <label><input type="checkbox" ng-click="filterAlerts('warning')">Warning</label>
+            <label><input type="checkbox" ng-click="filterAlerts('information')">Information</label>
+            <label><input type="checkbox" ng-click="filterAlerts('not_classified')">Not Classified</label>
+        </div>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -13,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="trigger in results.result | orderBy:['-priority','-lastchange']"
+                <tr ng-repeat="trigger in results | filter:priorityFilter | orderBy:['-priority','-lastchange']"
                     ng-class="{
                         'disaster': trigger.priority=='disaster',
                         'high': trigger.priority=='high',

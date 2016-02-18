@@ -3,3 +3,4 @@ flask-wtf
 flask-script
 gunicorn
 python-slugify
+requests

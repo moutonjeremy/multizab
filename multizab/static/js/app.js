@@ -38,8 +38,28 @@ app.controller('RefreshCacheCtrl', function($scope, $interval, GetFactory, Cache
 app.controller('AlertsListCtrl', function ($scope, $interval, GetFactory){
     this.loadNotifications = function (){
         GetFactory.getResult('api/alerts').then(function(result){
-            $scope.results = result;
+            $scope.results = result.result;
         })
+    }
+
+    $scope.alertsPriority = [];
+
+    $scope.filterAlerts = function(priority) {
+        var i = $.inArray(priority, $scope.alertsPriority);
+        if (i > -1) {
+            $scope.alertsPriority.splice(i, 1);
+        } else {
+            $scope.alertsPriority.push(priority);
+        }
+    }
+
+    $scope.priorityFilter = function(alerts) {
+        if ($scope.alertsPriority.length > 0) {
+            if ($.inArray(alerts.priority, $scope.alertsPriority) < 0)
+                return;
+        }
+
+        return alerts;
     }
 
     $interval(function(){

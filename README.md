@@ -7,39 +7,40 @@
 
 
 ## Update
+### 18 Feb 2016
+ - Add filter by priority
+
 ### 13 Feb 2016
  - Remove database (json file used now)
  - Logging if a zabbix backend is ko
  - python 3 compatibility
  - Graph (per trigger level/hosts/Zabbix)
 
-### Coming
- ...
+## Requirements
+ - ``flask``: web framework
+ - ``flask-wtf``: flask plugin (WTForms)
+ - ``flask-script``: flask plugin
+ - ``gunicorn``: python wsgi
+ - ``python-slugify``: A Python Slugify application that handles Unicode
+ - ``requests``: HTTP Library
 
-## First usage
-
-### Clone repo
+## Install
 ```bash
 git clone git@github.com:Jeremmm/multizab.git
-```
-
-### Create virtualenv
-```bash
 cd multizab
 virtualenv env -p python2.7
-```
-
-### Install dependencies
-```bash
 env/bin/pip install -r requirements.txt
-```
-
-### Copy config file
-```bash
 cp multizab\config-template.py multizab\config.py
-```
-
-### Run server
-```bash
 env/bin/python manage.py runserver
 ```
+
+## Usage with gunicorn
+```bash
+env/bin/gunicorn -w 4 multizab:app -b 127.0.0.1:8000 -D
+```
+
+## Author
+Jeremy Mouton (@jeremmm) <jeremmm@labbs.fr>
+
+## Licence
+MIT. See ``LICENSE`` for more details.
